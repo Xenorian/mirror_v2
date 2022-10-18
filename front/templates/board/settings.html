@@ -1,0 +1,110 @@
+{% extends 'board/base/board_base.html' %}
+
+{% block title %}
+设置中心
+
+{% endblock %}
+
+
+{% block head %}
+
+
+{% endblock %}
+
+
+
+{% block main %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>设置中心</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">个人信息</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">用户名（不可修改）</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{user.username}} disabled>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="../../../mirror_user/forget_password">修改</a></label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="************" disabled>
+                </div>
+              </div>  
+              <!-- /.card-body -->
+            </div>
+          </div>
+          <!-- /.card -->
+
+
+          <!-- Horizontal Form -->
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">绑定邮箱</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form class="form-horizontal" method="post">
+              {% csrf_token %}
+              <h3>{{msg_info}}</h3>
+              <div class="card-body">
+                <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">当前邮箱</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" placeholder={{user.email}} disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">修改邮箱</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="请输入新的邮箱地址" name="newEmail" value={{newEmail}}>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">验证码</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="请输入邮箱验证码" name="verification">
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <button type="submit" class="btn btn-info" style="float:right;">提交修改</button>
+                <button type="submit" class="btn btn-info" style="float:right; margin-right:3px;">发送验证码</button>
+              </div>
+              <!-- /.card-footer -->
+            </form>
+          </div>
+          <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+{% endblock %}

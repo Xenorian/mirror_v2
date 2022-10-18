@@ -1,0 +1,84 @@
+{% extends 'board/base/board_base.html' %}
+
+{% block title %}
+增加项目
+
+{% endblock %}
+
+
+{% block head %}
+
+
+{% endblock %}
+
+
+
+{% block main %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>增加项目</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title"></h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <h3>{{msg_info}}</h3>
+            
+            <!-- url 'board:addproject'/{{request.session.User.uid}} -->
+ 
+            <form action="{% url 'board:addproject' 'whisper' %}" method="post">
+              {% csrf_token %}
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="project_name">Github中的项目名称</label>
+                  <input type="text" class="form-control" id="project_name" placeholder="请输入项目名称" name="project_name">
+                </div>
+                <div class="form-group">
+                  <label for="project_description">项目描述</label>
+                  <input type="text" class="form-control" id="project_description" placeholder="请输入项目描述" name="project_description">
+                </div>
+                <div class="form-group">
+                    <label for="project_url">项目名称</label>
+                    <input type="text" class="form-control" id="project_url" placeholder="请输入项目链接" name="project_nickname">
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary" style="float:right">添加</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.card -->
+
+
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+{% endblock %}

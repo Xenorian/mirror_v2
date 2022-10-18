@@ -1,0 +1,72 @@
+{% extends 'board/base/board_base.html' %}
+
+{% block title %}
+联系我们
+
+{% endblock %}
+
+
+{% block head %}
+
+
+{% endblock %}
+
+
+
+{% block main %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>联系我们</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-body row">
+        <div class="col-5 text-center d-flex align-items-center justify-content-center">
+          <div class="">
+            <h2><img src={% static 'adminlte/dist/img/logo.png'%} alt="mirror-logo" height=70px></h2>
+            <br>
+            <p class="lead mb-5">地址：浙江大学玉泉校区<br>
+              邮箱: <a href="mailto:contact@zjues.com">contact@zjues.com</a>
+            </p>
+          </div>
+        </div>
+        <form action="{% url 'board:contact' username %}" method="post" class="col-7">
+          {% csrf_token %}
+          <label for="inputMessage">{{msg_info}}</label>
+          <div class="form-group">
+            <label for="inputName">您的姓名</label>
+            <input type="text" id="inputName" class="form-control", name="realname"/>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail">您的邮箱</label>
+            <input type="email" id="inputEmail" class="form-control", name="email" />
+          </div>
+          <div class="form-group">
+            <label for="inputSubject">反馈主题</label>
+            <input type="text" id="inputSubject" class="form-control", name="theme" />
+          </div>
+          <div class="form-group">
+            <label for="inputMessage">详细信息</label>
+            <textarea id="inputMessage" class="form-control" rows="4", name="info" ></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="提交">
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </section>
+  <!-- /.content -->
+
+{% endblock %}

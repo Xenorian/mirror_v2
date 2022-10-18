@@ -1,0 +1,86 @@
+{% extends 'board/base/board_base.html' %}
+
+{% block title %}
+使用说明
+
+{% endblock %}
+
+
+{% block head %}
+
+
+{% endblock %}
+
+
+
+{% block main %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>FAQ</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">FAQ</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+  
+      <!-- Main content -->
+      <section class="content">
+          <div class="row">
+              <div class="col-12" id="accordion">
+                  <div class="card card-primary card-outline">
+                      <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
+                          <div class="card-header">
+                              <h4 class="card-title w-100">
+                                  1. Mirror是用来干什么的？
+                              </h4>
+                          </div>
+                      </a>
+                      <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                          <div class="card-body">
+                              Mirror是一款开源软件开发分析工具，可以跟踪和分析软件开发的流程。
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card card-primary card-outline">
+                      <a class="d-block w-100" data-toggle="collapse" href="#collapseTwo">
+                          <div class="card-header">
+                              <h4 class="card-title w-100">
+                                  2. Mirror支持哪些平台的项目跟踪？
+                              </h4>
+                          </div>
+                      </a>
+                      <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                          <div class="card-body">
+                              目前，Mirror暂时只支持Github平台的项目，其它平台的项目我们也会陆续接入。
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card card-primary card-outline">
+                      <a class="d-block w-100" data-toggle="collapse" href="#collapseThree">
+                          <div class="card-header">
+                              <h4 class="card-title w-100">
+                                  3. 这里填一个关于Mirror的问题。
+                              </h4>
+                          </div>
+                      </a>
+                      <div id="collapseThree" class="collapse" data-parent="#accordion">
+                          <div class="card-body">
+                              这里放上对应的回答。
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </section>
+      <!-- /.content -->
+
+{% endblock %}

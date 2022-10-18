@@ -1,0 +1,70 @@
+{% extends 'account/base/account_base.html' %}
+
+{% block title %}登录{% endblock %}
+
+{% block head %}   {% endblock %}
+
+{% block main %}
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <!--<a href="../../index2.html" class="h1"><b>Mi</b>rror</a>-->
+      <img src={% static 'adminlte/dist/img/logo.png'%} alt="mirror-logo" height=50px>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg"><font color="#007bff">登录以开启全新世界</font></p>
+
+      <form action="{% url 'mirroruser:login' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="请输入邮箱" name="email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="请输入密码" name="password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember" value=1>
+              <label for="remember">
+                记住登录状态
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">登录</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      
+      <!-- /.social-auth-links -->
+
+      <p class="mb-1">
+        <a href="../../account/forgotpassword">忘记密码？</a>
+      </p>
+      <p class="mb-0">
+        <a href="../../account/register" class="text-center">注册</a>
+      </p>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
+</body>
+{% endblock %}

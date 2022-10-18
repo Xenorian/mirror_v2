@@ -1,0 +1,118 @@
+{% extends 'board/base/board_base.html' %}
+
+{% block title %}
+我的项目
+
+{% endblock %}
+
+
+{% block head %}
+
+
+{% endblock %}
+
+
+
+{% block main %}
+ <!-- Content Header (Page header) -->
+ <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>我的项目</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">项目列表</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th style="width: 5%">
+                        ID
+                    </th>
+                    <th style="width: 20%">
+                        项目名
+                    </th>
+                    <th style="width: 30%">
+                        项目描述
+                    </th>
+                    <th>
+                        创建时间
+                    </th>
+                    <th style="width: 8%" class="text-center">
+                        跟踪状态
+                    </th>
+                    <th style="width: 20%">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                  var ID = 1;
+                </script>
+                {% for project in projects %}
+                <tr>
+                    <td>
+                      <script>
+                        document.write(ID++);
+                      </script>
+                    </td>
+                    <td>
+                        <a>
+                            {{project.project_name}}
+                        </a>
+                    </td>
+                    <td>
+                        {{project.Description}}
+                    </td>
+                    <td class="project_progress">
+                        {{project.Date_created}}
+                    </td>
+                    <td class="project-state">
+                        <span class="badge badge-success">正常</span>
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" href="{%  url 'board:mainboard' username project.project_name %}">
+                            <i class="fas fa-folder">
+                            </i>
+                            查看
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="{%  url 'board:delete' username project.project_name %}">
+                            <i class="fas fa-trash">
+                            </i>
+                            删除
+                        </a>
+                    </td>
+                </tr>
+                {% endfor%}
+              
+            </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+  </section>
+  <!-- /.content -->
+
+{% endblock %}

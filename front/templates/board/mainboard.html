@@ -1,0 +1,105 @@
+{% extends 'board/base/project_base.html' %}
+
+{% block title %}
+项目面板
+
+{% endblock %}
+
+
+{% block head %}
+
+
+{% endblock %}
+
+
+
+{% block main %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>项目面板</h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">项目信息</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">项目名称</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{project.project_name}} disabled>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">创建时间</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{project.Date_created}} disabled>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">上次提交时间</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{project.Date_of_lastpush}} disabled>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">使用语言</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{project.Language}} disabled>
+                </div>
+              </div>              
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">fork数目</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{project.Number_of_forks}} disabled>
+                </div>
+              </div>              
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">星级</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{project.Number_of_stars}} disabled>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">地址</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder={{project.Html_url}} disabled>
+                </div>
+              </div>
+              
+              <!-- /.card-body -->
+            </div>
+          </div>
+          <!-- /.card -->
+
+          <!-- Horizontal Form -->
+
+          <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+{% endblock %}

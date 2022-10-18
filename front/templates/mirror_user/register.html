@@ -1,0 +1,79 @@
+{% extends 'mirror_user/base/mirror_user_base.html' %}
+
+
+{% block title %}注册账户{% endblock %}
+
+{% block head %}   {% endblock %}
+
+{% block main %}
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <!--<a href="../../index2.html" class="h1"><b>Mi</b>rror</a>-->
+      <img src="{% static 'adminlte/dist/img/logo.png'%}" alt="mirror-logo" height=50px>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg"><font color="#007bff">注册，开启全新旅程</font></p>
+      <small>{{form.errors}}</small>
+
+      <form action="{% url 'mirror_user:user_register' %}" method="post">
+          {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="用户名" name="username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="邮箱" name="email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="请输入密码" name="password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="再次输入密码" name="confirm">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="id_agree_terms" name="agree_terms" value=1>
+              <label for="id_agree_terms">
+               我同意 <a href="../register_terms">用户协议</a>
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">注册</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <a href="../../mirror_user/login" class="text-center">我有账号，直接登录</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+</body>
+
+{% endblock %}
