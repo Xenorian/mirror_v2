@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.board',
-    'apps.mirror_user'
+    'apps.mirror_user',
+    'apps.github_spider'
 ]
 
 MIDDLEWARE = [

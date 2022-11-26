@@ -7,13 +7,13 @@ import json
 import random
 from django.core.mail import send_mail
 
+# UA代理
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
 }
 
 
 def board_settings(request, username):
-
     user = User.objects.get(username=username)
 
     try:
@@ -29,17 +29,22 @@ def board_settings(request, username):
             userProfile.verification = random.randint(1000, 9999)
             userProfile.save()
             newEmail = request.POST.get('newEmail')
-            send_mail(subject="来自MIRROR公司的邮件", message="【MIRROR】您的验证码是{}，请勿将验证码泄露给他人，如非本人操作请忽略".format(userProfile.verification), from_email="747618283@qq.com", recipient_list=[newEmail,], fail_silently=False)
-            return render(request, 'board/settings.html', {'msg_info': "验证码已发送", 'user': user, 'username': username, 'newEmail': newEmail})
+            send_mail(subject="来自MIRROR公司的邮件",
+                      message="【MIRROR】您的验证码是{}，请勿将验证码泄露给他人，如非本人操作请忽略".format(userProfile.verification),
+                      from_email="1793013266@qq.com", recipient_list=[newEmail, ], fail_silently=False)
+            return render(request, 'board/settings.html',
+                          {'msg_info': "验证码已发送", 'user': user, 'username': username, 'newEmail': newEmail})
         else:
             verification = request.POST.get('verification')
             newEmail = request.POST.get('newEmail')
             if verification == userProfile.verification:
                 user.email = newEmail
                 user.save()
-                return render(request, 'board/settings.html', {'msg_info': "重置邮箱成功", 'user': user, 'username': username, 'newEmail': ''})
+                return render(request, 'board/settings.html',
+                              {'msg_info': "重置邮箱成功", 'user': user, 'username': username, 'newEmail': ''})
             else:
-                return render(request, 'board/settings.html', {'msg_info': "验证码错误，请重新核实", 'user': user, 'username': username, 'newEmail': newEmail})
+                return render(request, 'board/settings.html',
+                              {'msg_info': "验证码错误，请重新核实", 'user': user, 'username': username, 'newEmail': newEmail})
 
 
 def board_contact(request, username):
@@ -103,6 +108,7 @@ def board_mainboard(request, username, project_name):
     project = Project.objects.get(project_name=project_name)
     return render(request, 'board/mainboard.html', {'project': project, 'username': username})
 
+
 def board_calendar(request, username):
     return render(request, 'board/calendar.html', {'username': username})
 
@@ -111,17 +117,21 @@ def board_chart1(request, username, project_name):
     project = Project.objects.get(project_name=project_name)
     return render(request, 'board/chart1.html', {'project': project, 'username': username})
 
+
 def board_chart2(request, username, project_name):
     project = Project.objects.get(project_name=project_name)
     return render(request, 'board/chart2.html', {'project': project, 'username': username})
+
 
 def board_chart3(request, username, project_name):
     project = Project.objects.get(project_name=project_name)
     return render(request, 'board/chart3.html', {'project': project, 'username': username})
 
+
 def board_table1(request, username, project_name):
     project = Project.objects.get(project_name=project_name)
     return render(request, 'board/table1.html', {'project': project, 'username': username})
+
 
 def board_table2(request, username, project_name):
     project = Project.objects.get(project_name=project_name)
@@ -129,46 +139,30 @@ def board_table2(request, username, project_name):
 
 
 def get_info_from_github(username, full_name, Description, project_name):
-
     user = User.objects.get(username=username)
     # pygithub object
     g = Github()
-
     repo = g.get_repo(full_name)
-
     project_id = repo.id
-
     full_name = repo.full_name
-
     Description = repo.description
-
     Date_created = repo.created_at
-
     Date_of_lastpush = repo.pushed_at
-
     Language = repo.language
-    
     Home_page = repo.homepage
-
     Number_of_forks = repo.forks
     # number of stars
     Number_of_stars = repo.stargazers_count
-
     Html_url = repo.html_url
-
     url = repo.commits_url.replace('{/sha}', '')
-
     rep = requests.get(url=url, headers=headers)
-
     results = json.loads(rep.text)
-
-    project = Project(project_id=project_id, full_name=full_name, Description=Description, Date_created=Date_created, Date_of_lastpush=Date_of_lastpush, Language=Language, 
-                      Home_page=Home_page, Number_of_forks=Number_of_forks, Number_of_stars=Number_of_stars, Html_url=Html_url, project_name=project_name)
-
+    project = Project(project_id=project_id, full_name=full_name, Description=Description, Date_created=Date_created,
+                      Date_of_lastpush=Date_of_lastpush, Language=Language,
+                      Home_page=Home_page, Number_of_forks=Number_of_forks, Number_of_stars=Number_of_stars,
+                      Html_url=Html_url, project_name=project_name)
     project.save()
-
     project.users_participated.add(user)
-
     project.save()
 
     for result in results:
@@ -179,14 +173,17 @@ def get_info_from_github(username, full_name, Description, project_name):
         message = result.get('message')
         comment_count = result.get('comment_count')
         if result.get('commiter') is None:
-            commit = Commit(sha=sha, author_name=author_name, author_email=author_email, author_date=author_date, message=message, comment_count=comment_count, project=project)
+            commit = Commit(sha=sha, author_name=author_name, author_email=author_email, author_date=author_date,
+                            message=message, comment_count=comment_count, project=project)
 
         else:
             commiter_name = result.get('commiter').get('name')
             commiter_email = result.get('commiter').get('email')
             commiter_date = result.get('commiter').get('date')
-            commit = Commit(sha=sha, author_name=author_name, author_email=author_email, author_date=author_date, commiter_name=commiter_name,
-                            commiter_email=commiter_email, commiter_date=commiter_date, message=message, comment_count=comment_count, project=project)
+            commit = Commit(sha=sha, author_name=author_name, author_email=author_email, author_date=author_date,
+                            commiter_name=commiter_name,
+                            commiter_email=commiter_email, commiter_date=commiter_date, message=message,
+                            comment_count=comment_count, project=project)
 
         commit.save()
 

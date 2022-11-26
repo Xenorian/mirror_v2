@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 # # Create your models here.
 class Project(models.Model):
-
     users_participated = models.ManyToManyField(to=User, related_name='usersParticipated')
 
     project_id = models.CharField(max_length=50, null=True)
@@ -38,7 +37,6 @@ class Project(models.Model):
 
 
 class Commit(models.Model):
-
     author_name = models.CharField(max_length=100, null=True)
     author_email = models.EmailField(null=True)
     author_date = models.DateTimeField(default=django.utils.timezone.now, null=True)
@@ -51,3 +49,10 @@ class Commit(models.Model):
     message = models.CharField(max_length=100, null=True)
     comment_count = models.IntegerField(null=True)
     project = models.ForeignKey('Project', on_delete=models.CASCADE, null=True)
+
+
+# # Create your models here.
+class Contributor(models.Model):
+    contributor_id = models.CharField(max_length=50, null=False, primary_key=True)
+    login = models.CharField(max_length=50, null=True)
+    project = models.CharField(max_length=50, null=True)
