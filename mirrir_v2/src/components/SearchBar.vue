@@ -1,8 +1,10 @@
 <template>
     <div class="mt-4">
-        <el-input v-model="inputsearch" placeholder="Please input" class="input-with-select">
+        <el-input v-model="inputsearch" 
+            placeholder="Please input {owner}/{repo}" 
+            class="input-with-select">
             <template #append>
-                <el-button :icon="Search" @click="onsearch"/>
+                <el-button :icon="Plus" @click="onsearch"/>
             </template>
         </el-input>
     </div>
@@ -11,10 +13,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Search } from '@element-plus/icons-vue'
+import { Plus } from '@element-plus/icons-vue'
+
 const inputsearch = ref('')
 const onsearch = () => {
-    console.log("search: "+inputsearch)
+    alert('项目已添加')
+    console.log(inputsearch.value)
 }
 
 </script>
