@@ -1,0 +1,7 @@
+@import './base.css';
+
+#app {
+  text-align: center;
+
+  font-weight: normal;
+}
