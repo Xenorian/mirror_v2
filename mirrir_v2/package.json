@@ -10,7 +10,10 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@primer/octicons": "^17.9.0",
     "ant-design-vue": "^3.2.15",
+    "axios": "^1.2.1",
+    "echarts": "^5.4.1",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"

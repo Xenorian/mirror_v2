@@ -1,0 +1,48 @@
+<template>
+    <el-row :gutter="10">
+        <el-col :span="10">
+            <el-input v-model="listsearch" 
+            size="small" 
+            placeholder="Type to search"/>
+        </el-col>
+    </el-row>
+    
+    <el-row :gutter="10">
+        <el-table class ="table" :data="filterTableData" height="600">
+            <el-table-column label="Company" prop="name" width="300"/>
+            <el-table-column label="Date" prop="value" width="200"/>
+        </el-table>
+    </el-row>
+</template>
+
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
+import { repoDataStore } from '@/stores/repoData'
+
+const data = repoDataStore();
+
+interface Comp_info {
+    name: string
+    value: number
+}
+const listsearch = ref('')
+const tableData: Comp_info[] = data.val[0].bubbledata
+const filterTableData = computed(() =>
+    tableData.filter(
+        (data) =>
+            !listsearch.value ||
+            data.name.toLowerCase().includes(listsearch.value.toLowerCase())
+    )
+)
+
+
+</script>
+
+<style  scoped>
+.table{
+    margin-top: 20px;
+    max-height: 90%;
+    max-width: 100%;
+    text-align: left;
+}
+</style>

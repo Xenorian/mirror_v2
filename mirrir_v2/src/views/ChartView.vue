@@ -1,115 +1,115 @@
 <template>
-    <el-container class="layout-container-demo">
-      <el-aside width="200px">
-        <el-scrollbar>
-          <el-menu :default-openeds="['1', '3']">
-            <el-sub-menu index="1">
+    <a-layout>
+      <a-layout-header class="header">
+
+        <a-menu
+          v-model:selectedKeys="selectedKeys1"
+          theme="dark"
+          mode="horizontal"
+          @click="backToHome"
+          :style="{ lineHeight: '64px' }"
+        >
+          <a-menu-item key="1">回到首页</a-menu-item>
+
+        </a-menu>
+      </a-layout-header>
+      
+      <a-layout>
+        <a-layout-sider width="200" style="background: #fff">
+          <a-menu
+            v-model:selectedKeys="selectedKeys2"
+            v-model:openKeys="openKeys"
+            mode="inline"
+            @click="handelClick"
+            :style="{ borderRight: 0 }"
+          >
+            <a-menu-item key="dashboard">
+                <dashboard-outlined />
+                总览
+            </a-menu-item>
+
+            <a-menu-item key="main_contributor">
+                <user-outlined />
+                主要贡献者
+            </a-menu-item>
+
+            <a-sub-menu key="sub1">
               <template #title>
-                <el-icon><message /></el-icon>Navigator One
+                <span>
+                    <line-chart-outlined />
+                    社区发展速度
+                </span>
               </template>
-              <el-menu-item-group>
-                <template #title>Group 1</template>
-                <el-menu-item index="1-1">Option 1</el-menu-item>
-                <el-menu-item index="1-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="1-3">Option 3</el-menu-item>
-              </el-menu-item-group>
-              <el-sub-menu index="1-4">
-                <template #title>Option4</template>
-                <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
-              </el-sub-menu>
-            </el-sub-menu>
-            <el-sub-menu index="2">
+              <a-menu-item key="develop_star">Star</a-menu-item>
+              <a-menu-item key="develop_commit">Commit</a-menu-item>
+              <a-menu-item key="develop_issue">Issue</a-menu-item>
+              <a-menu-item key="develop_pr">Pull Request</a-menu-item>
+            </a-sub-menu>
+            <a-sub-menu key="sub2">
               <template #title>
-                <el-icon><icon-menu /></el-icon>Navigator Two
+                <span>
+                  <laptop-outlined />
+                  按公司查看数据
+                </span>
               </template>
-              <el-menu-item-group>
-                <template #title>Group 1</template>
-                <el-menu-item index="2-1">Option 1</el-menu-item>
-                <el-menu-item index="2-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="2-3">Option 3</el-menu-item>
-              </el-menu-item-group>
-              <el-sub-menu index="2-4">
-                <template #title>Option 4</template>
-                <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-              </el-sub-menu>
-            </el-sub-menu>
-            <el-sub-menu index="3">
-              <template #title>
-                <el-icon><setting /></el-icon>Navigator Three
-              </template>
-              <el-menu-item-group>
-                <template #title>Group 1</template>
-                <el-menu-item index="3-1">Option 1</el-menu-item>
-                <el-menu-item index="3-2">Option 2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="Group 2">
-                <el-menu-item index="3-3">Option 3</el-menu-item>
-              </el-menu-item-group>
-              <el-sub-menu index="3-4">
-                <template #title>Option 4</template>
-                <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
-              </el-sub-menu>
-            </el-sub-menu>
-          </el-menu>
-        </el-scrollbar>
-      </el-aside>
-  
-      <el-container>
-        <el-header style="text-align: left; font-size: 25px">
-          icon here
-        </el-header>
-  
-        <el-main>
-          <el-scrollbar>
-            <el-table :data="tableData">
-              <el-table-column prop="date" label="Date" width="140" />
-              <el-table-column prop="name" label="Name" width="120" />
-              <el-table-column prop="address" label="Address" />
-            </el-table>
-          </el-scrollbar>
-        </el-main>
-      </el-container>
-    </el-container>
+              <a-menu-item key="company_commit">Commit</a-menu-item>
+              <a-menu-item key="company_issue">Issue</a-menu-item>
+              <a-menu-item key="company_pr">Pull Request</a-menu-item>
+            </a-sub-menu>
+          </a-menu>
+        </a-layout-sider>
+
+        <a-layout style="padding: 0 24px 24px; height: 800px;">
+            <div style="margin-top: 10px;margin-bottom: 10px;">
+                
+            </div>
+            
+          <a-layout-content
+            :style="{ background: '#fff', 
+            padding: '24px', margin: 0,
+             minHeight: '400px' }"
+          >     
+            <suspense>
+              <router-view class="page"/>
+            </suspense>
+          </a-layout-content>
+        </a-layout>
+      </a-layout>
+    </a-layout>
   </template>
-  
-  <script lang="ts" setup>
-  import { ref } from 'vue'
-  import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
-  
-  const item = {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  }
-  const tableData = ref(Array.from({ length: 20 }).fill(item))
-  </script>
-  
-  <style scoped>
-  .layout-container-demo .el-header {
-    position: relative;
-    background-color: var(--el-color-primary-light-7);
-    color: var(--el-text-color-primary);
-  }
-  .layout-container-demo .el-aside {
-    color: var(--el-text-color-primary);
-    background: var(--el-color-primary-light-8);
-  }
-  .layout-container-demo .el-menu {
-    border-right: none;
-  }
-  .layout-container-demo .el-main {
-    padding: 0;
-  }
-  .layout-container-demo .toolbar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    right: 20px;
-  }
-  </style>
-  
+
+<script lang="ts" async setup>
+    import { RouterView } from 'vue-router'
+    import { DashboardOutlined, LineChartOutlined,
+      UserOutlined, LaptopOutlined } from '@ant-design/icons-vue';
+    import { ref, onMounted } from 'vue';
+    import { repoDataStore } from '@/stores/repoData'
+    import { useRouter } from "vue-router";
+
+    const m_repoData = repoDataStore();
+    await m_repoData.addData('pytorch','pytorch')
+
+    const selectedKeys1= ref<string[]>(['2'])
+    const selectedKeys2= ref<string[]>(['1'])
+    const collapsed= ref<boolean>(false)
+    const openKeys= ref<string[]>(['sub1'])
+
+    const router = useRouter();
+
+    const handelClick = (item) => {
+      console.log(item)
+
+      router.push(item.key)
+    }
+
+    const backToHome = () =>{
+      router.replace('/home')
+    }
+</script>
+
+<style>
+    .site-layout-background {
+    background: rgb(211, 211, 211);
+    }
+
+</style>

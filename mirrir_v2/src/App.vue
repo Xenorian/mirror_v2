@@ -3,9 +3,15 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <router-view />
+  <suspense>
+    <router-view class="page"/>
+  </suspense>
 </template>
 
 <style scoped>
-
+    .page{
+      min-height: 600px;
+      min-width: 1700px;
+    }
 </style>
+ 

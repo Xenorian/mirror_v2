@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
-    "element-plus": "^2.2.26"
+    "echarts": "^5.4.1",
+    "element-plus": "^2.2.26",
+    "highcharts": "^10.3.2"
   }
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import SearchBar from '../components/SearchBar.vue'
-import Hello from '../components/helloSection.vue'
-import List from '../components/ProjectList.vue'
+import SearchBar from '../components/home/SearchBar.vue'
+import Hello from '../components/home/helloSection.vue'
+import List from '../components/home/ProjectList.vue'
 </script>
 
 <template>

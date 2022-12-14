@@ -5,6 +5,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'root',
+      redirect: '/home'
+    },
+    {
       path: '/home',
       name: 'home',
       component: HomeView
@@ -12,10 +17,51 @@ const router = createRouter({
     {
       path: '/chart',
       name: 'chart',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ChartView.vue')
+      component: () => import('../views/ChartView.vue'),
+      redirect: '/chart/dashboard',
+      children: [
+        {
+          path: 'dashboard',
+          component: () => import('../components/charts/DashBoard.vue')
+        },
+
+        {
+          path: 'main_contributor',
+          component: () => import('../components/charts/MainContributor.vue')
+        },
+
+
+        {
+          path: 'develop_star',
+          component: () => import('../components/charts/LineChart.vue')
+        },
+        {
+          path: 'develop_commit',
+          component: () => import('../components/charts/LineChart.vue')
+        },
+        {
+          path: 'develop_issue',
+          component: () => import('../components/charts/LineChart.vue')
+        },
+        {
+          path: 'develop_pr',
+          component: () => import('../components/charts/LineChart.vue')
+        },
+
+
+        {
+          path: 'company_commit',
+          component: () => import('../components/charts/Bubblechart.vue')
+        },
+        {
+          path: 'company_issue',
+          component: () => import('../components/charts/Bubblechart.vue')
+        },
+        {
+          path: 'company_pr',
+          component: () => import('../components/charts/Bubblechart.vue')
+        },
+      ]
     }
   ]
 })
