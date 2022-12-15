@@ -2,6 +2,10 @@
 import SearchBar from '../components/home/SearchBar.vue'
 import Hello from '../components/home/helloSection.vue'
 import List from '../components/home/ProjectList.vue'
+import { repoDataStore } from '@/stores/repoData'
+
+const m_repoData = repoDataStore();
+await m_repoData.getRepoList();
 </script>
 
 <template>
