@@ -4,14 +4,14 @@
     </div>
 
     <div class="right">
-        <CompanyList id="bubblelist"/>
+        <CompanyList_issue id="bubblelist"/>
     </div>
 	
 </template>
 
 
 <script setup>
-	import CompanyList from './BubbleChart/CompanyList.vue'
+	import CompanyList_issue from './BubbleChart/CompanyList_issue.vue'
 </script>
 
 <script>
@@ -35,7 +35,7 @@ export default {
 	mounted() {
 		for(let i=0;i<data.val.length;i++){
 			this.bubbledata.push({});
-			this.bubbledata[i].data = data.val[i].bubbledata
+			this.bubbledata[i].data = data.val[i].bubbledata_issue
 			this.bubbledata[i].name = data.val[i].basicData.repo
 		}
 		
@@ -51,7 +51,7 @@ export default {
 					// height: '50%'
 				},
 				title: {
-					text: "Commit Contributors' Companies",
+					text: "Issue Contributors' Companies",
 					margin: 0
 				},
 				tooltip: {

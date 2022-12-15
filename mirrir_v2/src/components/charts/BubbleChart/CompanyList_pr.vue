@@ -27,7 +27,7 @@ interface Comp_info {
     value: number
 }
 const listsearch = ref('')
-const tableData: Comp_info[] = data.val[0].bubbledata
+const tableData: Comp_info[] = data.val[0].bubbledata_pr
 tableData.sort((a,b)=>{
     if(a.value<b.value){
         return 1

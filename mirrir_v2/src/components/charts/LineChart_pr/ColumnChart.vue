@@ -30,21 +30,21 @@ for(let i=0;i<data.val.length;i++){
 
 // compare the top
 while(1){
-  date_this_turn = data.val[0].commitActivity[counter[0]][2];
+  date_this_turn = data.val[0].prActivity[counter[0]][2];
   choosen_val = 0;
   for(let i=1;i<data.val.length;i++){
-    if(data.val[i].commitActivity[counter[i]][2]<date_this_turn &&
-      data.val[i].commitActivity[counter[i]][2]>date_now){
+    if(data.val[i].prActivity[counter[i]][2]<date_this_turn &&
+      data.val[i].prActivity[counter[i]][2]>date_now){
         choosen_val = i;
-        date_this_turn = data.val[i].commitActivity[counter[i]][2]
+        date_this_turn = data.val[i].prActivity[counter[i]][2]
     }
   }
   date_now = date_this_turn;
   
   // add data into chart
   for(let i=0;i<data.val.length;i++){
-    if(data.val[i].commitActivity[counter[i]][2] === date_now){
-      chartdata[i].data.push(data.val[i].commitActivity[counter[i]][0])
+    if(data.val[i].prActivity[counter[i]][2] === date_now){
+      chartdata[i].data.push(data.val[i].prActivity[counter[i]][0])
       counter[i]++;
     }
   }
@@ -53,7 +53,7 @@ while(1){
 
   let i=0;
   for(i=0;i<data.val.length;i++){
-    if(counter[i]!==data.val[i].commitActivity.length - 1){
+    if(counter[i]!==data.val[i].prActivity.length - 1){
       break;
     }
   }
@@ -95,7 +95,7 @@ onMounted(()=>{
     },
     calculable: true,
     title: {
-      text: 'Commit Per Day',
+      text: 'Pull Request Per Day',
     },
     legend: {
       data: legend_item,

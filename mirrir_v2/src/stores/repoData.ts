@@ -68,8 +68,34 @@ export const repoDataStore = defineStore('repoData',{
           .then(response => {
             tmp_data.commitActivity = JSON.parse(response.data)
           })
-  
-          // company data
+
+          // issue activity
+          await axios
+          .get(m_rooturl + "/get_day_count",{
+            params: {
+              repo: this.repos[i].repo,
+              owner: this.repos[i].owner,
+              type: 'issues'
+            }
+          })
+          .then(response => {
+            tmp_data.issueActivity = JSON.parse(response.data)
+          })
+          
+          // pr activity
+          await axios
+          .get(m_rooturl + "/get_day_count",{
+            params: {
+              repo: this.repos[i].repo,
+              owner: this.repos[i].owner,
+              type: 'pulls'
+            }
+          })
+          .then(response => {
+            tmp_data.prActivity = JSON.parse(response.data)
+          })
+
+          // company data - commit
           await axios
           .get(m_rooturl + '/get_creator', {
             params: {
@@ -80,6 +106,32 @@ export const repoDataStore = defineStore('repoData',{
           })
           .then(response => {
             tmp_data.bubbledata = JSON.parse(response.data).result
+          })
+
+          // company data - issue
+          await axios
+          .get(m_rooturl + '/get_creator', {
+            params: {
+              repo: this.repos[i].repo,
+              owner: this.repos[i].owner,
+              type: 'issues'
+            },
+          })
+          .then(response => {
+            tmp_data.bubbledata_issue = JSON.parse(response.data).result
+          })
+
+          // company data - pr
+          await axios
+          .get(m_rooturl + '/get_creator', {
+            params: {
+              repo: this.repos[i].repo,
+              owner: this.repos[i].owner,
+              type: 'pulls'
+            },
+          })
+          .then(response => {
+            tmp_data.bubbledata_pr = JSON.parse(response.data).result
           })
   
           // user data

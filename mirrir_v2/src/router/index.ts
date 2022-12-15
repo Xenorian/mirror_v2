@@ -32,20 +32,16 @@ const router = createRouter({
 
 
         {
-          path: 'develop_star',
-          component: () => import('../components/charts/LineChart.vue')
-        },
-        {
           path: 'develop_commit',
           component: () => import('../components/charts/LineChart.vue')
         },
         {
           path: 'develop_issue',
-          component: () => import('../components/charts/LineChart.vue')
+          component: () => import('../components/charts/LineChart_issue.vue')
         },
         {
           path: 'develop_pr',
-          component: () => import('../components/charts/LineChart.vue')
+          component: () => import('../components/charts/LineChart_pr.vue')
         },
 
 
@@ -55,11 +51,11 @@ const router = createRouter({
         },
         {
           path: 'company_issue',
-          component: () => import('../components/charts/Bubblechart.vue')
+          component: () => import('../components/charts/Bubblechart_issue.vue')
         },
         {
           path: 'company_pr',
-          component: () => import('../components/charts/Bubblechart.vue')
+          component: () => import('../components/charts/Bubblechart_pr.vue')
         },
       ]
     }
