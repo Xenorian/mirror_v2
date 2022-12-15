@@ -62,13 +62,13 @@ export default {
 					packedbubble: {
 						useSimulation: false,
 						Draggable: false,
-						minSize: '10%',
-						maxSize: '300%',
+						minSize: '20%',
+						maxSize: '700%',
 						zMin: 0,
 						zMax: 1000,
 						layoutAlgorithm: {
 							splitSeries: true,
-							gravitationalConstant: 0.02
+							gravitationalConstant: 0.01
 						},
 						dataLabels: {
 							enabled: true,

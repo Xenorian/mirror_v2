@@ -33,10 +33,10 @@ export const repoDataStore = defineStore('repoData',{
     repos: [],
     repoList: []
   }),
-  persist: {
-    //这里存储默认使用的是session
-      enabled: true,
-    },
+  // persist: {
+  //   //这里存储默认使用的是session
+  //     enabled: true,
+  //   },
   actions: {
     async addData() {
       let tmp_data={};
@@ -58,20 +58,24 @@ export const repoDataStore = defineStore('repoData',{
   
           // commit activity
           await axios
-          .get(m_rooturl + "/get_commit_activity",{
+          .get(m_rooturl + "/get_day_count",{
             params: {
-              repo: this.repos[i].repo
+              repo: this.repos[i].repo,
+              owner: this.repos[i].owner,
+              type: 'commit'
             }
           })
           .then(response => {
-            tmp_data.commitActivity = JSON.parse(response.data).result
+            tmp_data.commitActivity = JSON.parse(response.data)
           })
   
           // company data
           await axios
-          .get(m_rooturl + '/get_issue_creator', {
+          .get(m_rooturl + '/get_creator', {
             params: {
-              repo: this.repos[i].repo
+              repo: this.repos[i].repo,
+              owner: this.repos[i].owner,
+              type: 'commit'
             },
           })
           .then(response => {
@@ -105,7 +109,6 @@ export const repoDataStore = defineStore('repoData',{
       .get(m_rooturl + '/get_all')
       .then(response => {
         this.repoList = JSON.parse(response.data)
-        console.log(this.repoList)
       })
     },
 
@@ -116,7 +119,7 @@ export const repoDataStore = defineStore('repoData',{
           return;
         }
       }
-      
+
       this.repos.push({
         repo: repoName,
         owner: ownerName
@@ -132,7 +135,6 @@ export const repoDataStore = defineStore('repoData',{
 
 // deal with language_detail
 function turn_into_percentage( language_detail ){
-  console.log(language_detail)
   // sum all
   let all_line = 0;
   for(let i=0;i<language_detail.length;i++){
@@ -144,5 +146,4 @@ function turn_into_percentage( language_detail ){
     language_detail[i].value /=  all_line;
   }
 
-  console.log(language_detail)
 }

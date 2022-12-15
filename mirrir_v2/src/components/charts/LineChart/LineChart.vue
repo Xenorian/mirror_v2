@@ -106,7 +106,6 @@ onMounted(() => {
     myChart.setOption(option);
   }
 
-  console.log(data.val)
   let series = []
 
   let _rawData = [];
@@ -121,7 +120,7 @@ onMounted(() => {
       _rawData[_rawData.length-1][0] = sum;
     }
   }
-  console.log(_rawData,series)
+
   run(_rawData,series)
 
   option && myChart.setOption(option);

@@ -30,7 +30,6 @@
                 社区发展速度
               </span>
             </template>
-            <a-menu-item key="develop_star">Star</a-menu-item>
             <a-menu-item key="develop_commit">Commit</a-menu-item>
             <a-menu-item key="develop_issue">Issue</a-menu-item>
             <a-menu-item key="develop_pr">Pull Request</a-menu-item>
@@ -100,8 +99,6 @@ const openKeys = ref<string[]>(['sub1'])
 const router = useRouter();
 
 const handelClick = (item) => {
-  console.log(item)
-
   router.push(item.key)
 }
 

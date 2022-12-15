@@ -18,7 +18,6 @@
     import { repoDataStore } from '@/stores/repoData'
 
     const data = repoDataStore();
-    console.log(data.val[0].basicData.language_detail)
 
     onMounted(() => {
         var myChart = echarts.init(document.getElementById('chart')!);

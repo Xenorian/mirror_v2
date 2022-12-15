@@ -13,9 +13,7 @@ import './assets/main.css'
 
 const app = createApp(App)
 
-import piniaPluginPersist from 'pinia-plugin-persist'
 const pinia = createPinia()
-pinia.use(piniaPluginPersist)
 
 app.use(pinia)
 app.use(createPinia())

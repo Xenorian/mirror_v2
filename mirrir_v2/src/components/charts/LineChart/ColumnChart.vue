@@ -30,8 +30,6 @@ for(let i=0;i<data.val.length;i++){
 
 // compare the top
 while(1){
-  console.log("1");
-  
   date_this_turn = data.val[0].commitActivity[counter[0]][2];
   choosen_val = 0;
   for(let i=1;i<data.val.length;i++){
@@ -97,7 +95,7 @@ onMounted(()=>{
     },
     calculable: true,
     title: {
-      text: 'Commit Per Week',
+      text: 'Commit Per Day',
     },
     legend: {
       data: legend_item,
