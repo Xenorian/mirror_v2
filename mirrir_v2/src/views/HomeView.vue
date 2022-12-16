@@ -20,7 +20,7 @@ await m_repoData.getRepoList();
 }
 
 .searchBar{
-  max-width: 400px;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
 }

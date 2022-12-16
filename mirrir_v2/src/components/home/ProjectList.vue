@@ -74,7 +74,7 @@
     }
 
     const search = ref('')
-    const tableData: User[] = [];
+    let tableData: User[] = [];
 
     for(let i=0;i<data.repoList.length;i++){
       tableData[i]={};
@@ -100,9 +100,11 @@
         !search.value ||
         data.name.toLowerCase().includes(search.value.toLowerCase())
     )
+
     )
     const handleEdit = (index: number, row: User) => {
-      data.addRepo(row.owner,row.name)
+      data.addNewRepo(row.owner,row.name)
+      alert('项目已开始更新，请耐心等待')
     }
 
     const handleWatch = async(index: number, row: User) => {
@@ -111,8 +113,18 @@
       router.replace('/chart')
     }
     
-    const handleDelete = (index: number, row: User) => {
-      data.addRepo(row.owner,row.name)
+    const handleDelete = async(index: number, row: User) => {
+      tableData = [];
+      await data.deleteRepo(row.owner,row.name)
+      for(let i=0;i<data.repoList.length;i++){
+        tableData[i]={};
+        tableData[i].date=data.repoList[i].update
+        tableData[i].name=data.repoList[i].repo
+        tableData[i].owner=data.repoList[i].owner
+      }
+
+      search.value = '0'
+      search.value = ''
     }
 
     const Compare = async() => {

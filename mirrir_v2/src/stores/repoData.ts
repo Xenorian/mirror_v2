@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { List } from 'echarts'
 
-const m_rooturl='http://10.181.237.12:8000'
+const m_rooturl='http://10.181.237.12:52750'
 
 // interface LanguageDetail{
 //   value:  number;
@@ -182,6 +182,34 @@ export const repoDataStore = defineStore('repoData',{
     clearData(){
       this.repos=[];
       this.val=[];
+    },
+
+    async addNewRepo(ownerName: String,repoName: String){
+      axios
+      .get(m_rooturl + '/add_new_repo',{
+        params:{
+          owner: ownerName,
+          repo: repoName
+        }
+      }).then( () =>{
+        alert('添加成功')
+        this.repoList=[];
+        this.getRepoList();
+      })
+    },
+
+    async deleteRepo(ownerName: String,repoName: String){
+      await axios
+      .get(m_rooturl + '/delete',{
+        params:{
+          owner: ownerName,
+          repo: repoName
+        }
+      }).then( async() =>{
+        this.repoList=[];
+        await this.getRepoList();
+      }
+      )
     }
   },
 })

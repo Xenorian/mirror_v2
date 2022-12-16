@@ -42,15 +42,7 @@
             </div>
 
             <div class="data">
-                ****
-            </div>
-
-            <div class="content">
-                {{list[5]}}
-            </div>
-
-            <div class="data">
-                ****
+                {{data.val[props.index].basicData.contributor}}
             </div>
 
             <div class="tag">
@@ -77,7 +69,7 @@
     const data = repoDataStore();
     console.log()
 
-    const list = ref(['Stars','Commits','Issues','Forks','Watchers','PR creators']);
+    const list = ref(['Stars','Commits','Issues','Forks','Contributor']);
     
     const tag_content = data.val[props.index].basicData.topic;
 </script>
