@@ -115,14 +115,15 @@
       data.addRepo(row.owner,row.name)
     }
 
-    const Compare = () => {
+    const Compare = async() => {
       if(multipleSelection.value.length < 2){
         ElMessageBox.alert('对比项目少于两个', 'Error!', {
           confirmButtonText: 'OK',
         })
       }
       else{
-      console.log(multipleSelection.value)
+        await data.addData();
+        router.replace('/chart');
       }
     }
 </script>

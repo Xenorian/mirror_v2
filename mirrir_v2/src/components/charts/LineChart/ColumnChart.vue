@@ -16,56 +16,92 @@ let date_this_turn = "0000-00-00 00:00:00"
 let counter = [];
 let choosen_val = 0;
 let legend_item = [];
-let chartdata = [{}]
+let chartdata = []
+let sum_counter = 0;
+// let sum_all = 0;
 
 // get x axis
 // init counter and legend
 for(let i=0;i<data.val.length;i++){
   counter[i] = 1;
   legend_item[i] = data.val[i].basicData.repo;
+  chartdata[i] = {};
   chartdata[i].name = data.val[i].basicData.repo;
   chartdata[i].type = 'bar';
   chartdata[i].data = [];
+  // sum_all += data.val[i].commitActivity.length
 }
 
 // compare the top
 while(1){
-  date_this_turn = data.val[0].commitActivity[counter[0]][2];
-  choosen_val = 0;
-  for(let i=1;i<data.val.length;i++){
+  let exit=false;
+  for(let i=0;i<data.val.length;i++){
+    if(data.val[i].commitActivity.length == counter[i]){
+      console.log("finish one!")
+      if(i==data.val.length - 1){
+        exit = true;
+      }
+
+      continue;
+    }else{
+      date_this_turn = data.val[i].commitActivity[counter[i]][2];
+      choosen_val = i;
+    }
+  }
+
+  // if(exit==true || sum_counter >= sum_all - 4)
+
+  if(exit==true){
+    break;
+  }
+
+  for(let i=0;i<data.val.length;i++){
+    if(data.val[i].commitActivity.length == counter[i] ){
+      continue;
+    }
+
     if(data.val[i].commitActivity[counter[i]][2]<date_this_turn &&
       data.val[i].commitActivity[counter[i]][2]>date_now){
         choosen_val = i;
         date_this_turn = data.val[i].commitActivity[counter[i]][2]
     }
   }
+  if(date_now == date_this_turn){
+    console.log("error")
+  } else {
+    
+  }
   date_now = date_this_turn;
   
   // add data into chart
   for(let i=0;i<data.val.length;i++){
+    if(data.val[i].commitActivity.length == counter[i] ){
+      continue;
+    }
+
     if(data.val[i].commitActivity[counter[i]][2] === date_now){
       chartdata[i].data.push(data.val[i].commitActivity[counter[i]][0])
+      sum_counter++;
       counter[i]++;
+    } else {
+      chartdata[i].data.push(0)
     }
   }
 
   xdata[xdata.length] = date_now;
 
-  let i=0;
-  for(i=0;i<data.val.length;i++){
-    if(counter[i]!==data.val[i].commitActivity.length - 1){
-      break;
-    }
-  }
+  // let i=0;
+  // for(i=0;i<data.val.length;i++){
+  //   if(counter[i]!==data.val[i].commitActivity.length){
+  //     break;
+  //   }
+  // }
 
-  if(i===data.val.length){
-    console.log("success");
-    break;
-  }
+  // if(i===data.val.length){
+  //   console.log("success");
+  //   break;
+  // }
 }
-
-
-
 
 
 onMounted(()=>{

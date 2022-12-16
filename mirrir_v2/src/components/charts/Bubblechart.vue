@@ -60,7 +60,7 @@ export default {
 				},
 				plotOptions: {
 					packedbubble: {
-						useSimulation: false,
+						useSimulation: true,
 						Draggable: false,
 						minSize: '10%',
 						maxSize: '300%',

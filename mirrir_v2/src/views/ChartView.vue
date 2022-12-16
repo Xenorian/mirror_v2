@@ -53,10 +53,9 @@
 
         </div>
 
-        <a-layout-content :style="{
+        <a-layout-content class="content" :style="{
           background: '#fff',
           padding: '24px', margin: 0,
-          minHeight: '400px'
         }">
           <suspense>
             <router-view class="page" />
@@ -111,5 +110,9 @@ const backToHome = () => {
 <style>
 .site-layout-background {
   background: rgb(211, 211, 211);
+}
+
+.content{
+  overflow: auto
 }
 </style>

@@ -82,7 +82,7 @@ onMounted(() => {
         nameLocation: 'middle'
       },
       yAxis: {
-        name: 'Commit'
+        name: 'Issue'
       },
       grid: {
         right: 140
@@ -111,16 +111,92 @@ onMounted(() => {
   let _rawData = [];
   _rawData[0]=data.val[0].issueActivity[0];
 
+  let counter = [];
+  let sum_counter = 0;
+  let choosen_val = 0;
+  let sum = [];
+  let date_now = "0000-00-00 00:00:00"
+  let date_this_turn = "0000-00-00 00:00:00"
+
   for(let i=0;i<data.val.length;i++){
+    counter[i]= 1 ;
+    sum[i] = 0;
     series.push(data.val[i].basicData.repo)
-    let sum=0;
-    for(let j=1;j<data.val[i].issueActivity.length;j++){
-      _rawData[_rawData.length]= JSON.parse(JSON.stringify(data.val[i].issueActivity[j]))
-      sum += _rawData[_rawData.length-1][0];
-      _rawData[_rawData.length-1][0] = sum;
+  }
+
+  // compare the top
+  while(1){
+    let exit=false;
+    for(let i=0;i<data.val.length;i++){
+      if(data.val[i].issueActivity.length == counter[i]){
+        console.log("finish one!")
+        if(i==data.val.length - 1){
+          exit = true;
+        }
+
+        continue;
+      }else{
+        date_this_turn = data.val[i].issueActivity[counter[i]][2];
+        choosen_val = i;
+      }
+    }
+
+    // if(exit==true || sum_counter >= sum_all - 4)
+
+    if(exit==true){
+      break;
+    }
+
+    for(let i=0;i<data.val.length;i++){
+      if(data.val[i].issueActivity.length == counter[i] ){
+        continue;
+      }
+
+      if(data.val[i].issueActivity[counter[i]][2]<date_this_turn &&
+        data.val[i].issueActivity[counter[i]][2]>date_now){
+          choosen_val = i;
+          date_this_turn = data.val[i].issueActivity[counter[i]][2]
+      }
+    }
+    if(date_now == date_this_turn){
+      console.log("error")
+    } else {
+      
+    }
+    date_now = date_this_turn;
+    
+    // add data into chart
+    for(let i=0;i<data.val.length;i++){
+      if(data.val[i].issueActivity.length == counter[i] ){
+        continue;
+      }
+
+      if(data.val[i].issueActivity[counter[i]][2] === date_now){
+        _rawData[_rawData.length]= JSON.parse(JSON.stringify(data.val[i].issueActivity[counter[i]]))
+        sum[i] += _rawData[_rawData.length-1][0];
+        _rawData[_rawData.length-1][0] = sum[i];
+
+        sum_counter++;
+        counter[i]++;
+      } else {
+        _rawData[_rawData.length] = JSON.parse(JSON.stringify(data.val[i].issueActivity[counter[i]]))
+        _rawData[_rawData.length-1][0] = sum[i];
+        _rawData[_rawData.length-1][2] = date_now;
+      }
     }
   }
 
+  // for(let i=0;i<data.val.length;i++){
+
+  //   for(let j=1;j<data.val[i].issueActivity.length;j++){
+  //     _rawData[_rawData.length]= JSON.parse(JSON.stringify(data.val[i].issueActivity[j]))
+  //     sum[i] += Number(_rawData[_rawData.length-1][0]);
+  //     _rawData[_rawData.length-1][0] = sum[i];
+  //   }
+  // }
+
+
+  console.log(_rawData,series)
   run(_rawData,series)
 
   option && myChart.setOption(option);

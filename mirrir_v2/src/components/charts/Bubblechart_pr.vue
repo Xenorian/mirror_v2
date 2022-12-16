@@ -60,10 +60,10 @@ export default {
 				},
 				plotOptions: {
 					packedbubble: {
-						useSimulation: false,
+						useSimulation: true,
 						Draggable: false,
-						minSize: '20%',
-						maxSize: '700%',
+						minSize: '10%',
+						maxSize: '300%',
 						zMin: 0,
 						zMax: 1000,
 						layoutAlgorithm: {

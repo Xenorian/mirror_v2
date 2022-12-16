@@ -1,6 +1,6 @@
 <template>
     <div class="part1">
-        <img :src="avatar">
+        <!-- <img :src="avatar"> -->
 
         <div class="title">
             <h1>
@@ -17,9 +17,15 @@
 
 <script setup lang="ts">
     import { ref  } from 'vue'
-    const avatar = ref('https://avatars.githubusercontent.com/u/21003710?v=4')
-    const title = ref('Pytorch/Pytorch')
-    const des = ref('Tensors and Dynamic neural networks in Python with strong GPU acceleration')
+    import { repoDataStore } from '@/stores/repoData'
+
+    const props = defineProps(['index'])
+
+    const data = repoDataStore();
+
+    // const avatar = ref('https://avatars.githubusercontent.com/u/21003710?v=4')
+    const title = data.val[props.index].basicData.repo
+    const des = data.val[props.index].basicData.description
     
 </script>
 
@@ -30,7 +36,7 @@
         grid-template-rows: 1fr 1fr; 
         gap: 10px 15px; 
         grid-template-areas: 
-            ". . ."
+            "title title title"
             "description description description"; 
         width: 800px; 
         height: 200px; 
@@ -42,6 +48,8 @@
 
     .title{
         font-size: 60px;
+        grid-area: title;
+        text-align: left;
     }
 
     .description{

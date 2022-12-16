@@ -10,7 +10,7 @@
             </div>
 
             <div class="data">
-                {{data.val[0].basicData.stars}}
+                {{data.val[props.index].basicData.stars}}
             </div>
 
             <div class="content">
@@ -18,7 +18,7 @@
             </div>
 
             <div class="data">
-                {{data.val[0].basicData.pulls}}
+                {{data.val[props.index].basicData.pulls}}
             </div>
 
             <div class="content">
@@ -26,7 +26,7 @@
             </div>
 
             <div class="data">
-                {{data.val[0].basicData.issues}}
+                {{data.val[props.index].basicData.issues}}
             </div>
 
             <div class="content">
@@ -34,7 +34,7 @@
             </div>
 
             <div class="data">
-                {{data.val[0].basicData.forks}}
+                {{data.val[props.index].basicData.forks}}
             </div>
 
             <div class="content">
@@ -72,11 +72,14 @@
     import { ref,onMounted  } from 'vue'
     import { repoDataStore } from '@/stores/repoData'
 
+    const props = defineProps(['index'])
+
     const data = repoDataStore();
+    console.log()
 
     const list = ref(['Stars','Commits','Issues','Forks','Watchers','PR creators']);
     
-    const tag_content = data.val[0].basicData.topic;
+    const tag_content = data.val[props.index].basicData.topic;
 </script>
 
 <style scoped>

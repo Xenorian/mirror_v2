@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { List } from 'echarts'
 
-const m_rooturl='http://10.181.247.163:8000'
+const m_rooturl='http://10.181.237.12:8000'
 
 // interface LanguageDetail{
 //   value:  number;
@@ -145,14 +145,15 @@ export const repoDataStore = defineStore('repoData',{
           .then(response => {
             tmp_data.userData = JSON.parse(response.data).result
           })
-  
-          console.log(tmp_data)
-          this.val[i] = (tmp_data)
+          
+          this.val[i] = JSON.parse(JSON.stringify(tmp_data))
           // let cpy = JSON.parse(JSON.stringify(tmp_data));
           // this.val.push(cpy)
         } catch (err){
           console.log(err)
         }
+
+        console.log(this.val)
       }
     },
     

@@ -1,5 +1,5 @@
 <template>
-    <div id="mainchart"></div>
+    <div :id="graph_id" class="chart"></div>
 </template>
 
 <script lang="ts" setup>
@@ -9,6 +9,8 @@ import { repoDataStore } from '@/stores/repoData'
 
 
 const data = repoDataStore();
+const props = defineProps(['index'])
+const graph_id = data.val[props.index].basicData.repo + "_contributor"
 
 let type_to_int = new Map();
 type_to_int.set('pulls',0)
@@ -18,7 +20,7 @@ type_to_int.set('review',3)
 let type_activate = [1,1,1,1];
 
 let totaldata = [];
-let userdata = data.val[0].userData
+let userdata = data.val[props.index].userData
 console.log(userdata)
 let i = 0;
 for (i = 0; i < userdata.length; i++) {
@@ -44,7 +46,7 @@ totaldata.sort(function(a,b){
 })
 
 onMounted(() => {
-    var chartDom = document.getElementById('mainchart')!;
+    var chartDom = document.getElementById(graph_id)!;
     var myChart = echarts.init(chartDom);
     var option;
     option = {
@@ -65,6 +67,9 @@ onMounted(() => {
                 // Use axis to trigger tooltip
                 type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
             }
+        },
+        title: {
+            text: graph_id,
         },
         legend: {},
         grid: {
@@ -158,7 +163,7 @@ onMounted(() => {
 
         })
         
-        var chartDom = document.getElementById('mainchart')!;
+        var chartDom = document.getElementById(graph_id)!;
         var myChart = echarts.init(chartDom);
         option && myChart.setOption(option);
     })
@@ -167,5 +172,8 @@ onMounted(() => {
 </script>
 
 <style>
-
+.chart{
+    width: 900px;
+    height: 600px;
+}
 </style>
