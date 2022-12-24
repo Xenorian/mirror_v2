@@ -38,7 +38,7 @@
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
   ],
   "thread_num": 20,
-  "api_token": "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",
+  "api_token": "",
   "user_batch_size": 20,
   "repo_batch_size": 20
 }
