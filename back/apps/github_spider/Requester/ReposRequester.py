@@ -673,13 +673,12 @@ class ReposRequester(BaseRequester):
     def move(self, owner, repo):
         res = models.Issues.objects.filter(repo_name=repo).values("user_login", "user_id")
         res = list(res)
-        print(res)
         for i in res:
             old_user = models.User.objects.filter(login=i["user_login"], owner=owner, repo=repo)
             if old_user.exists():
                 d = list(old_user.values())
                 t = d[0]["issues"] + 1
-                models.User.objects.filter(login=i["user_login"]).update(
+                models.User.objects.filter(login=i["user_login"], owner=owner,repo=repo).update(
                     issues=t
                 )
             else:

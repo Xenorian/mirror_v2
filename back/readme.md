@@ -26,13 +26,13 @@ Pip install -r requirements.txt
 创建数据库相关命令：
 
 ```
-Python manage.py makemigrations
+Python manage.py makemigrations apps
 ```
 
  
 
 ```
-Python manage.py migrate
+Python manage.py migrate apps
 ```
 
 
