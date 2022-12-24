@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { List } from 'echarts'
 
-const m_rooturl='http://10.181.237.12:52750'
+const m_rooturl='http://10.192.156.69:52750'
 
 // interface LanguageDetail{
 //   value:  number;
