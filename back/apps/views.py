@@ -73,23 +73,27 @@ def add_new_repo(request):
     r = ReposRequester()
     try:
         r.get_repo_basic(owner, repo)
-        print("aaa")
+        print("finish basic")
         r.get_pull_detail(owner, repo)
-        print("aaa")
+        print("finish detail")
         r.get_issues(owner, repo)
-        print("aaa")
+        print("finish issues")
         r.get_commit(owner, repo)
-        print("aaa")
+        print("finish commit")
         r.get_activity(owner, repo)
-        print("aaa")
-        r.get_contributor(owner, repo)
-        print("aaa")
+        print("finish activity")
+        #r.get_contributor(owner, repo)
+        #print("finish contributor")
         r.get_companys(owner,repo)
-        print("aaa")
+        print("finish companys")
         r.set_up_company(owner, repo, "pulls")
+        print("finish pulls")
         r.set_up_company(owner, repo, "reviews")
+        print("finish reviews")
         r.set_up_company(owner, repo, "commit")
+        print("finish commit")
         r.set_up_company(owner, repo, "issues")
+        print("finish issues")
         r.update(owner, repo)
         return HttpResponse()
     except Exception as e:
@@ -115,6 +119,7 @@ def get_basic(request):
                 language_list.append(temp_dict)
             res_dict["language_detail"] = language_list
             res_dict["stars"] = i.stars
+            res_dict["commits"] = i.commits
             res_dict["issues"] = i.issues
             res_dict["forks"] = i.forks
             res_dict["open_pulls"] = int(i.open_pulls)
